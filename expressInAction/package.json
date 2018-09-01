@@ -1,0 +1,8 @@
+{
+    "name": "hello-world",
+    "author": "David Crespo",
+    "private": true,
+    "dependencies": {
+        "express": "^4.16.3"
+    }
+}
