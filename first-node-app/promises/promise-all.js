@@ -1,7 +1,9 @@
 const facebookCall = new Promise((resolve, reject) => {
     setTimeout(() => {
         console.log('Facebook call...');
-        reject(new Error('Facebook call error'));
+        resolve({
+            id: 'call 1'
+        });
     }, 4000);
 });
 
@@ -14,6 +16,6 @@ const twitter = new Promise((resolve, reject) => {
     }, 2000);
 });
 
-Promise.all([facebookCall, twitter])
+Promise.race([facebookCall, twitter])
     .then(result => console.log(result))
     .catch(err => console.log(err));
