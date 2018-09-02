@@ -20,7 +20,7 @@ function getUser(id, callback) {
     setTimeout(() => {
         console.log('Reading a user froma a database...');
         callback({
-            id: 1,
+            id: id,
             gitUsername: 'David'
         });
     }, 2000);
