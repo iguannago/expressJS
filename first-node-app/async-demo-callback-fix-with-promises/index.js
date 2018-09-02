@@ -1,17 +1,10 @@
 console.log('Before');
 
-// getUser(1, (user) => {
-//   getRepositories(user.gitHubUsername, (repos) => {
-//     getCommits(repos[0], (commits) => {
-//       console.log(commits);
-//     })
-//   })
-// });
-
 getUser(1)
   .then(user => getRepositories(user.gitHubUsername))
   .then(repos => getCommits(repos[0]))
-  .then(commits => console.log(`display commits: ${commits}`));
+  .then(commits => console.log(`display commits: ${commits}`))
+  .catch(err => console.log(err));
 
 console.log('After');
 
