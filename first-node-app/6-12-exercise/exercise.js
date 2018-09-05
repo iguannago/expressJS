@@ -1,4 +1,3 @@
-
 getCustomer(1, (customer) => {
   console.log('Customer: ', customer);
   if (customer.isGold) {
@@ -11,15 +10,17 @@ getCustomer(1, (customer) => {
   }
 });
 
-function getCustomer(id, callback) {
-  setTimeout(() => {
-    callback({ 
-      id: 1, 
-      name: 'Mosh Hamedani', 
-      isGold: true, 
-      email: 'email' 
-    });
-  }, 4000);  
+function getCustomer(id) {
+  return new Promise((resolve, reject) => {
+    setTimeout(() => {
+      resolve({
+        id: 1,
+        name: 'David Crespo',
+        isGold: true,
+        email: 'email'
+      });
+    }, 4000);
+  });
 }
 
 function getTopMovies(callback) {
