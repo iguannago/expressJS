@@ -1,10 +1,14 @@
 console.log('Before');
 
 async function displayCommits() {
-  const user = await getUser(1);
-  const repos = await getRepositories(user.gitHubUsername);
-  const commits = await getCommits(repos[0]);
-  console.log(`commits: ${commits}`);
+  try {
+    const user = await getUser(1);
+    const repos = await getRepositories(user.gitHubUsername);
+    const commits = await getCommits(repos[0]);
+    console.log(`commits: ${commits}`);
+  } catch (error) {
+    console.log(error);
+  }
 }
 
 displayCommits();
@@ -36,7 +40,8 @@ function getCommits(repo) {
   return new Promise((resolve, reject) => {
     setTimeout(() => {
       console.log('getting commits...');
-      resolve(['commit1', 'commit2']);
+      // resolve(['commit1', 'commit2']);
+      reject(new Error('error when getting commits'));
     }, 2000);
   });
 }
