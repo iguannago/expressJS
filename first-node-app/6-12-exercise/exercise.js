@@ -25,6 +25,8 @@ async function getEmailResult() {
 
 getEmailResult();
 
+console.log('doing something meanwhile the promise is being resolved...');
+
 
 // exercise done using promises and handling errors as well.
 // getCustomer(1)
