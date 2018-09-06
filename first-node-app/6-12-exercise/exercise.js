@@ -10,25 +10,40 @@
 //   }
 // });
 
+async function getEmailResult() {
+  try {
+    const customer = await getCustomer(1);
+    if (customer.isGold) {
+      const movies = await getTopMovies();
+      const result = await sendEmail(customer.email, movies);
+      console.log(`email: ${result.email}, movies: ${result.movies}`);
+    }
+  } catch (error) {
+    console.log(error);
+  }
+}
+
+getEmailResult();
+
 
 // exercise done using promises and handling errors as well.
-getCustomer(1)
-  .then((customer) => {
-    if (customer.isGold) {
-      getTopMovies()
-        .then(movies => sendEmail(customer.email, movies))
-        .then(result => console.log(`email: ${result.email}, movies: ${result.movies}`))
-        .catch(err => console.log(err));
-    }
-  })
-  .catch(err => console.log(err));
+// getCustomer(1)
+//   .then((customer) => {
+//     if (customer.isGold) {
+//       getTopMovies()
+//         .then(movies => sendEmail(customer.email, movies))
+//         .then(result => console.log(`email: ${result.email}, movies: ${result.movies}`))
+//         .catch(err => console.log(err));
+//     }
+//   })
+//   .catch(err => console.log(err));
 
 function getCustomer(id) {
   return new Promise((resolve, reject) => {
     setTimeout(() => {
       console.log('getting customer...');
       resolve({
-        id: 1,
+        id: id,
         name: 'David Crespo',
         isGold: true,
         email: 'davidcrespoarroyo@gmail.com'
