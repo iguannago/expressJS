@@ -27,6 +27,16 @@ getEmailResult();
 
 console.log('doing something meanwhile the promise is being resolved...');
 
+setTimeout(() => {
+  console.log('doing something meanwhile the promise is being resolved...');
+}, 3000);
+
+setTimeout(() => {
+  console.log('doing something meanwhile the promise is being resolved...');
+}, 5000);
+
+
+
 
 // exercise done using promises and handling errors as well.
 // getCustomer(1)
@@ -67,11 +77,11 @@ function sendEmail(email, movies) {
   return new Promise((resolve, reject) => {
     setTimeout(() => {
       console.log('sending email...');
-      // resolve({
-      //   email: email,
-      //   movies: movies
-      // });
-      reject(new Error('error when sending email....'));
+      resolve({
+        email: email,
+        movies: movies
+      });
+      // reject(new Error('error when sending email....'));
     }, 4000);
   });
 }
