@@ -29,7 +29,7 @@ app.get('/api/courses', (req, res) => {
 
 app.get('/api/courses/:id', (req, res) => {
     const course = findCourseById(req.params.id);
-    if (!course) return res.status(404).send(`The course with the given ID(${courseId}) is not found`);
+    if (!course) return res.status(404).send(`The course with the given ID(${req.params.id}) is not found`);
     res.send(course);
 });
 
@@ -52,7 +52,7 @@ app.post('/api/courses', (req, res) => {
 
 app.put('/api/courses/:id', (req, res) => {
     const course = findCourseById(req.params.id);
-    if (!course) return res.status(404).send(`The course with the given ID(${courseId}) is not found`);
+    if (!course) return res.status(404).send(`The course with the given ID(${req.params.id}) is not found`);
     const {
         error
     } = validateCourse(req.body);
@@ -63,7 +63,7 @@ app.put('/api/courses/:id', (req, res) => {
 
 app.delete('/api/courses/:id', (req, res) => {
     const course = findCourseById(req.params.id);
-    if (!course) return res.status(404).send(`The course with the given ID(${courseId}) is not found`);
+    if (!course) return res.status(404).send(`The course with the given ID(${req.params.id}) is not found`);
     const index = courses.indexOf(course);
     courses.splice(index, 1);
 
