@@ -16,5 +16,7 @@ app.get('/api/genres', (req, res) => {
 });
 
 app.get('/api/genres/:id', (req, res) => {
-
+    const id = req.params.id;
+    const genre = genres.find(g => g.id === parseInt(id));
+    res.send(genre);
 });
