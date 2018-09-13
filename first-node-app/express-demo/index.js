@@ -38,7 +38,9 @@ app.get('/api/post/:year/:month', (req, res) => {
 });
 
 app.post('/api/courses', (req, res) => {
-    const { error } = validateCourse(req.body);
+    const {
+        error
+    } = validateCourse(req.body);
     if (error) {
         res.status(400).send(validationResult.error.details[0].message);
         return;
@@ -54,12 +56,25 @@ app.post('/api/courses', (req, res) => {
 app.put('/api/courses/:id', (req, res) => {
     const course = findCourseById(req.params.id);
     if (!course) noCourseFoundErrorHandler(res, req.params.id);
-    const { error } = validateCourse(req.body);
+    const {
+        error
+    } = validateCourse(req.body);
     if (error) {
         res.status(400).send(error.details[0].message);
         return;
     }
     course.name = req.body.name;
+    res.send(course);
+});
+
+app.delete('/api/courses/:id', (req, res) => {
+    console.log('hey');
+    const course = findCourseById(req.params.id);
+    if (!course) noCourseFoundErrorHandler(res, req.params.id);
+
+    const index = courses.indexOf(course);
+    courses.splice(index, 1);
+
     res.send(course);
 });
 
