@@ -56,7 +56,7 @@ app.put('/api/courses/:id', (req, res) => {
     if (!course) noCourseFoundErrorHandler(res, req.params.id);
     const { error } = validateCourse(req.body);
     if (error) {
-        res.status(400).send(validationResult.error.details[0].message);
+        res.status(400).send(error.details[0].message);
         return;
     }
     course.name = req.body.name;
