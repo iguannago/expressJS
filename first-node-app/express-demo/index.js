@@ -29,7 +29,7 @@ app.get('/api/courses', (req, res) => {
 
 app.get('/api/courses/:id', (req, res) => {
     const course = findCourseById(req.params.id);
-    if (!course) noCourseFoundErrorHandler(res, req.params.id);
+    if (!course) return res.status(404).send(`The course with the given ID(${courseId}) is not found`);
     res.send(course);
 });
 
@@ -41,10 +41,7 @@ app.post('/api/courses', (req, res) => {
     const {
         error
     } = validateCourse(req.body);
-    if (error) {
-        res.status(400).send(validationResult.error.details[0].message);
-        return;
-    }
+    if (error) return res.status(400).send(validationResult.error.details[0].message);
     const course = {
         id: courses.length + 1,
         name: req.body.name
@@ -55,23 +52,18 @@ app.post('/api/courses', (req, res) => {
 
 app.put('/api/courses/:id', (req, res) => {
     const course = findCourseById(req.params.id);
-    if (!course) noCourseFoundErrorHandler(res, req.params.id);
+    if (!course) return res.status(404).send(`The course with the given ID(${courseId}) is not found`);
     const {
         error
     } = validateCourse(req.body);
-    if (error) {
-        res.status(400).send(error.details[0].message);
-        return;
-    }
+    if (error) return res.status(400).send(error.details[0].message);
     course.name = req.body.name;
     res.send(course);
 });
 
 app.delete('/api/courses/:id', (req, res) => {
-    console.log('hey');
     const course = findCourseById(req.params.id);
-    if (!course) noCourseFoundErrorHandler(res, req.params.id);
-
+    if (!course) return res.status(404).send(`The course with the given ID(${courseId}) is not found`);
     const index = courses.indexOf(course);
     courses.splice(index, 1);
 
@@ -80,10 +72,6 @@ app.delete('/api/courses/:id', (req, res) => {
 
 const port = process.env.PORT || 3001;
 app.listen(port, () => console.log(`Listening on port ${port}..`));
-
-function noCourseFoundErrorHandler(res, courseId) {
-    res.status(404).send(`The course with the given ID(${courseId}) is not found`);
-}
 
 function findCourseById(id) {
     return courses.find(c => c.id === parseInt(id));
