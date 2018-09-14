@@ -62,7 +62,6 @@ app.delete('/api/courses/:id', (req, res) => {
     if (!course) return res.status(404).send(`The course with the given ID(${req.params.id}) is not found`);
     const index = courses.indexOf(course);
     courses.splice(index, 1);
-
     res.send(course);
 });
 

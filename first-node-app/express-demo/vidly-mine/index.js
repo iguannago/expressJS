@@ -46,6 +46,15 @@ app.put('/api/genres/:id', (req, res) => {
     res.send(genre)
 });
 
+app.delete('/api/genres/:id', (req, res) => {
+    const id = req.params.id;
+    const genre = findCourseByid(id);
+    return404IfCourseNotFound(genre, id, res);
+    const index = genres.indexOf(genre);
+    genres.splice(index, 1);
+    res.send(genre);
+});
+
 function validateBody(body) {
     const schema = Joi.object().keys({
         name: Joi.string().min(3).required()
