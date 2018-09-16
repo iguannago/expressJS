@@ -1,8 +1,15 @@
 const Joi = require('joi');
 const express = require('express');
+const logger = require('./logger.js');
 const app = express();
 
+
 app.use(express.json());
+app.use(logger);
+app.use((req, res, next) => {
+    console.log('authenticating....');
+    next();
+});
 
 app.get('/', (req, res) => {
     res.send('Hello World!!!!');
