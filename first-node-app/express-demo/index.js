@@ -9,11 +9,18 @@ const app = express();
 
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
+
+console.log(`NODE_ENV: ${process.env.NODE_ENV}`);
+console.log(`app.get: ${app.get('env')}`); //if NODE_EN is not defined falls back to development
 app.use(express.static('public'));
-app.use(logger);
+if (app.get('env') === 'development') {
+    app.use(logger);
+    console.log('logger is enable...');
+}
 app.use(authentication);
 // app.use(helmet());
 // app.use(morgan('tiny'));
+
 
 app.get('/', (req, res) => {
     res.send('Hello World!!!!');
