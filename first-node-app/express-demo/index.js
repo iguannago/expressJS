@@ -5,6 +5,8 @@ const authentication = require('./authentication.js');
 const helmet = require('helmet');
 const morgan = require('morgan');
 const config = require('config');
+const appStartupDebugger = require('debug')('app:startup');
+const appDbDebugger = require('debug')('app:db');
 const app = express();
 
 
@@ -14,13 +16,15 @@ app.use(express.urlencoded({ extended: true }));
 console.log(`NODE_ENV: ${process.env.NODE_ENV}`);
 console.log(`app.get: ${app.get('env')}`); //if NODE_EN is not defined falls back to development
 app.use(express.static('public'));
+
 if (app.get('env') === 'development') {
     app.use(logger);
-    console.log('logger is enable...');
+    app.use(morgan(':method :url :status :response-time ms - :res[content-length]'));
+    appStartupDebugger('Morgan enabled...');
+    appDbDebugger('Connected to DB...')
 }
 app.use(authentication);
 app.use(helmet());
-app.use(morgan(':method :url :status :response-time ms - :res[content-length]'));
 
 console.log(`Application name: ${config.get('name')}`);
 console.log(`Mail server: ${config.get('mail.host')}`);
