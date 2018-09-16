@@ -24,6 +24,7 @@ app.use(morgan(':method :url :status :response-time ms - :res[content-length]'))
 
 console.log(`Application name: ${config.get('name')}`);
 console.log(`Mail server: ${config.get('mail.host')}`);
+console.log(`App password: ${config.get('mail.password')}`);
 
 app.get('/', (req, res) => {
     res.send('Hello World!!!!');
