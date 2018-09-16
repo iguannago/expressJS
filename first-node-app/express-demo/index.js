@@ -2,6 +2,8 @@ const Joi = require('joi');
 const express = require('express');
 const logger = require('./logger.js');
 const authentication = require('./authentication.js');
+// const helmet = require('helmet');
+// const morgan = require('morgan');
 const app = express();
 
 
@@ -10,6 +12,8 @@ app.use(express.urlencoded({ extended: true }));
 app.use(express.static('public'));
 app.use(logger);
 app.use(authentication);
+// app.use(helmet());
+// app.use(morgan('tiny'));
 
 app.get('/', (req, res) => {
     res.send('Hello World!!!!');
