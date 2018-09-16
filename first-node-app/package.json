@@ -1,5 +1,6 @@
 {
   "dependencies": {
-    "helmet": "^3.13.0"
+    "helmet": "^3.13.0",
+    "morgan": "^1.9.1"
   }
 }
