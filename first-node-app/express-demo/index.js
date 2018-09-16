@@ -4,6 +4,7 @@ const logger = require('./logger.js');
 const authentication = require('./authentication.js');
 // const helmet = require('helmet');
 // const morgan = require('morgan');
+// const config = require('config');
 const app = express();
 
 
@@ -21,6 +22,8 @@ app.use(authentication);
 // app.use(helmet());
 // app.use(morgan('tiny'));
 
+// console.log(`Application name: ${config.get('name')}`);
+// console.log(`Mail server: ${config.get('mail.host')}`);
 
 app.get('/', (req, res) => {
     res.send('Hello World!!!!');
