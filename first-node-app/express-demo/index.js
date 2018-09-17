@@ -13,6 +13,9 @@ const app = express();
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 
+app.set('view engine', 'pug');
+app.set('views', __dirname + '/views');
+
 console.log(`NODE_ENV: ${process.env.NODE_ENV}`);
 console.log(`app.get: ${app.get('env')}`); //if NODE_EN is not defined falls back to development
 app.use(express.static('public'));
@@ -31,7 +34,7 @@ console.log(`Mail server: ${config.get('mail.host')}`);
 console.log(`App password: ${config.get('mail.password')}`);
 
 app.get('/', (req, res) => {
-    res.send('Hello World!!!!');
+    res.render('index', { title: 'Express App', message: 'hello, world!!!' });
 });
 
 const courses = [{
