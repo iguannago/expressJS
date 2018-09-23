@@ -10,8 +10,13 @@
   "author": "",
   "license": "ISC",
   "dependencies": {
+    "config": "^2.0.1",
+    "debug": "^4.0.1",
     "express": "^4.16.3",
+    "helmet": "^3.13.0",
     "joi": "13.1.0",
-    "nodemon": "^1.18.4"
+    "morgan": "^1.9.1",
+    "nodemon": "^1.18.4",
+    "pug": "^2.0.3"
   }
 }
