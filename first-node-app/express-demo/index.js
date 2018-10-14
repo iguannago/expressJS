@@ -30,7 +30,7 @@ app.use('/', home);
 
 
 console.log(`NODE_ENV: ${process.env.NODE_ENV}`);
-console.log(`app.get: ${app.get('env')}`); //if NODE_EN is not defined falls back to development
+console.log(`app.get: ${app.get('env')}`); //if NODE_ENV is not defined falls back to development
 
 console.log(`Application name: ${config.get('name')}`);
 console.log(`Mail server: ${config.get('mail.host')}`);
